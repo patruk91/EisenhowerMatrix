@@ -2,7 +2,7 @@
 
 ## The story
 
-The Eisenhower Matrix is a great tool for time managing and improve your productivity. It is often used in IT projects teams to prioritize tasks. 
+The Eisenhower Matrix is a great tool for time managing and improve your productivity. It is often used in IT projects teams to prioritize tasks.
 
 Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to focus on the only one thing in one moment. That's the reason that he sometimes feels lost in his job. Please help him to improve his efficiency and implement for him Eisenhower Matrix Application. He precised his expectations the user story.
 
@@ -17,7 +17,7 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
 ## The user story
 
 1. As a user I would like to choose a status of shown TODO items:
-  
+
   - urgent & important items
   - not urgent & important items
   - urgent & not important items
@@ -97,7 +97,9 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
 
 * You are allowed to implement your own custom methods and classes. Remember about clean code.
 
-* All the fields and methods specified below should be `public` and your helper methods should be `private`.
+* All fields in classes specified below should be `private`. Use getters/setters to access fields.
+
+* All methods specified below should be `public` and your helper methods should be `private`.
 
 * All tests must pass.
 
@@ -142,15 +144,23 @@ __Attributes__
 __Instance methods__
 
 * ##### `TodoItem(String title, LocalDate deadline)`
-  
+
   Constructs a ToDoItem object
 
+* `getTitle()`
+
+  Getter for the * title * field
+
+* `getDeadline()`
+
+  Getter for the * deadline * field
+
 * `mark()`
-  
+
   Sets the object's * isDone * attribute to True
 
 * `unmark()`
-  
+
   Sets the object's * isDone * attribute to False
 
 * `toString()`
@@ -159,11 +169,11 @@ __Instance methods__
   Format of deadline is 'day-month'
 
   Expecting output for example done item:
-  
+
   `[x] 12-6 submit assignment`
 
   Expecting output for example undone item:
-  
+
   `[ ] 28-6 submit assignment`
 
 ### `TodoQuarter.java`
@@ -200,6 +210,10 @@ __Instance methods__
 
   Returns *TodoItem* object from *index* of list *todoItems*.
 
+* `getItems()`
+
+  Returns private field *todoItems*.
+
 * `toString()`
 
   Returns a formatted list of *todoItems* sorted decreasing by *deadline*. There is an expecting output:
@@ -219,9 +233,9 @@ __Attributes__
 
   - data: Map
   - description: contains *TodoQuarter* objects
-  
+
     key: String - status of todoQuarter, value: TodoQuarter object
-        
+
         possible keys of TODO quarter:
         - 'IU' means that todoQuarter contains important todoItems & urgent
         - 'IN' means that todoQuarter contains important todoItems & not urgent
@@ -235,6 +249,10 @@ __Instance methods__
 
   Constructs a *TodoMatrix* object with map of all possible quarters
 
+* `getQuarters()`
+  
+  Returns a private filed *todoQuarters*.
+
 * `getQuarter(String status)`
 
   Returns a chosen *TodoQuarter* object from a map *todoQuarters*.
@@ -243,26 +261,26 @@ __Instance methods__
 * `addItem(String title, LocalDate deadline, boolean isImportant)`
 
   Adds new item to map *todoQuarters* using adequate key. You should use method *addItem* from *TodoQuarter* class.
-  
+
   This method should be overloaded so as to accept two parameters only. In that case, isImportant should be `false` by default.
 
 * `addItemsFromFile(String fileName)`
 
   Reads data from *fileName.csv* file and appends *TodoItem* objects to attributes *todoItems* in the properly *TodoQuarter* objects.
   Every item is written in a separate line the following format:
-  
+
   `title|day-month|is_important`
-  
+
   If *isImportant* is equal to false then last element is an empty string. Otherwise the last element is an arbitrary string.
   If the last element of line is an empty string, *isImportant* is equal to false - it means that the item should be assigned to a not important TODO quarter. Otherwise item should be assign to an important TODO quarter.
-  
+
 * `saveItemsToFile(String fileName)`
 
   Writes all details about TODO items to *fileName.csv* file
   Every item is written in a separate line the following format:
-  
+
   `title|day-month|is_important`
-  
+
   If *isImportant* contains false then the last element of line should be an empty string. Otherwise last element is an arbitrary string.
 
 * `archiveItems()`
@@ -272,7 +290,7 @@ __Instance methods__
 * `toString()`
 
   Returns a todoQuarters list (an Eisenhower todoMatrix) formatted to string.
-  
+
 
 ## Running tests
 You will need to download jar file from: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-console-standalone

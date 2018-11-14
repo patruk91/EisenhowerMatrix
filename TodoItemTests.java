@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.*;
 
-
 class TodoItemTests {
     TodoItem todoItem;
 
@@ -26,23 +25,23 @@ class TodoItemTests {
 
         TodoItem todoItem = new TodoItem(title, deadline);
 
-        assertEquals(title, todoItem.title);
-        assertEquals(deadline, todoItem.deadline);
+        assertEquals(title, todoItem.getTitle());
+        assertEquals(deadline, todoItem.getDeadline());
 
         deadline = LocalDate.of(2015, Month.MAY, 16);
         todoItem = new TodoItem(title, deadline);
 
-        assertEquals(title, todoItem.title);
-        assertEquals(deadline, todoItem.deadline);
+        assertEquals(title, todoItem.getTitle());
+        assertEquals(deadline, todoItem.getDeadline());
     }
 
     @Test
     void testMarking() {
         this.todoItem.mark();
-        assertTrue(todoItem.isDone, "Item wasn't marked");
+        assertTrue(todoItem.isDone(), "Item wasn't marked");
 
         this.todoItem.unmark();
-        assertFalse(todoItem.isDone, "Item wasn't unmarked");
+        assertFalse(todoItem.isDone(), "Item wasn't unmarked");
     }
 
     @Test

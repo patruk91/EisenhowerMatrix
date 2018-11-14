@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.time.*;
 import java.util.*;
 
-
 class TodoQuarterTests {
     TodoQuarter todoQuarter;
 
@@ -18,7 +17,7 @@ class TodoQuarterTests {
 
     @Test
     void testConstructor() {
-        assertTrue(this.todoQuarter.todoItems.isEmpty());
+        assertTrue(this.todoQuarter.getItems().isEmpty());
     }
 
     @Test
@@ -27,10 +26,10 @@ class TodoQuarterTests {
         LocalDate deadline = LocalDate.of(2017, Month.JULY, 4);
 
         this.todoQuarter.addItem(title, deadline);
-        TodoItem todoItem = (TodoItem) this.todoQuarter.todoItems.get(0);
+        TodoItem todoItem = (TodoItem) this.todoQuarter.getItems().get(0);
 
-        assertEquals(title, todoItem.title);
-        assertEquals(deadline, todoItem.deadline);
+        assertEquals(title, todoItem.getTitle());
+        assertEquals(deadline, todoItem.getDeadline());
     }
 
     @Test
@@ -48,30 +47,30 @@ class TodoQuarterTests {
     void testSortItems() {
         String title = "implement Quarter class";
         List<LocalDate> deadlines = new ArrayList<LocalDate>();
-        deadlines.add( LocalDate.of(2017, Month.JUNE, 14) );
-        deadlines.add( LocalDate.of(2017, Month.MAY, 24) );
-        deadlines.add( LocalDate.of(2017, Month.JUNE, 4) );
-        deadlines.add( LocalDate.of(2017, Month.JULY, 3) );
-        deadlines.add( LocalDate.of(2017, Month.JUNE, 23) );
+        deadlines.add(LocalDate.of(2017, Month.JUNE, 14));
+        deadlines.add(LocalDate.of(2017, Month.MAY, 24));
+        deadlines.add(LocalDate.of(2017, Month.JUNE, 4));
+        deadlines.add(LocalDate.of(2017, Month.JULY, 3));
+        deadlines.add(LocalDate.of(2017, Month.JUNE, 23));
 
         for (LocalDate deadline : deadlines) {
             this.todoQuarter.addItem(title, deadline);
         }
 
-        TodoItem todoItem = (TodoItem) this.todoQuarter.todoItems.get(0);
-        assertEquals(deadlines.get(1), todoItem.deadline, "Item index: 0");
+        TodoItem todoItem = (TodoItem) this.todoQuarter.getItems().get(0);
+        assertEquals(deadlines.get(1), todoItem.getDeadline(), "Item index: 0");
 
-        todoItem = (TodoItem) this.todoQuarter.todoItems.get(1);
-        assertEquals(deadlines.get(2), todoItem.deadline, "Item index: 1");
+        todoItem = (TodoItem) this.todoQuarter.getItems().get(1);
+        assertEquals(deadlines.get(2), todoItem.getDeadline(), "Item index: 1");
 
-        todoItem = (TodoItem) this.todoQuarter.todoItems.get(2);
-        assertEquals(deadlines.get(0), todoItem.deadline, "Item index: 2");
+        todoItem = (TodoItem) this.todoQuarter.getItems().get(2);
+        assertEquals(deadlines.get(0), todoItem.getDeadline(), "Item index: 2");
 
-        todoItem = (TodoItem) this.todoQuarter.todoItems.get(3);
-        assertEquals(deadlines.get(4), todoItem.deadline, "Item index: 3");
+        todoItem = (TodoItem) this.todoQuarter.getItems().get(3);
+        assertEquals(deadlines.get(4), todoItem.getDeadline(), "Item index: 3");
 
-        todoItem = (TodoItem) this.todoQuarter.todoItems.get(4);
-        assertEquals(deadlines.get(3), todoItem.deadline, "Item index: 4");
+        todoItem = (TodoItem) this.todoQuarter.getItems().get(4);
+        assertEquals(deadlines.get(3), todoItem.getDeadline(), "Item index: 4");
     }
 
     @Test
@@ -90,10 +89,10 @@ class TodoQuarterTests {
 
         this.todoQuarter.removeItem(1);
 
-        TodoItem todoItem = (TodoItem) this.todoQuarter.todoItems.get(1);
+        TodoItem todoItem = (TodoItem) this.todoQuarter.getItems().get(1);
 
-        assertEquals("code", todoItem.title);
-        assertEquals(2, this.todoQuarter.todoItems.size());
+        assertEquals("code", todoItem.getTitle());
+        assertEquals(2, this.todoQuarter.getItems().size());
     }
 
     @Test
@@ -113,10 +112,10 @@ class TodoQuarterTests {
         this.todoQuarter.getItem(0).mark();
         this.todoQuarter.archiveItems();
 
-        TodoItem todoItem = (TodoItem) this.todoQuarter.todoItems.get(0);
+        TodoItem todoItem = (TodoItem) this.todoQuarter.getItems().get(0);
 
-        assertEquals("go to Codecool", todoItem.title);
-        assertEquals(2, this.todoQuarter.todoItems.size());
+        assertEquals("go to Codecool", todoItem.getTitle());
+        assertEquals(2, this.todoQuarter.getItems().size());
     }
 
     @Test

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.time.*;
 import java.util.*;
 
-
 class TodoMatrixTests {
     TodoMatrix todoMatrix;
 
@@ -33,17 +32,17 @@ class TodoMatrixTests {
         this.todoMatrix.addItem(title, dateNotUrgent, true);
         this.todoMatrix.addItem(title, dateNotUrgent, false);
 
-        TodoItem todoItem = (TodoItem) this.todoMatrix.todoQuarters.get("IU").getItem(0);
-        assertEquals(title, todoItem.title);
+        TodoItem todoItem = (TodoItem) this.todoMatrix.getQuarters().get("IU").getItem(0);
+        assertEquals(title, todoItem.getTitle());
 
-        todoItem = (TodoItem) this.todoMatrix.todoQuarters.get("IN").getItem(0);
-        assertEquals(title, todoItem.title);
+        todoItem = (TodoItem) this.todoMatrix.getQuarters().get("IN").getItem(0);
+        assertEquals(title, todoItem.getTitle());
 
-        todoItem = (TodoItem) this.todoMatrix.todoQuarters.get("NU").getItem(0);
-        assertEquals(title, todoItem.title);
+        todoItem = (TodoItem) this.todoMatrix.getQuarters().get("NU").getItem(0);
+        assertEquals(title, todoItem.getTitle());
 
-        todoItem = (TodoItem) this.todoMatrix.todoQuarters.get("NN").getItem(0);
-        assertEquals(title, todoItem.title);
+        todoItem = (TodoItem) this.todoMatrix.getQuarters().get("NN").getItem(0);
+        assertEquals(title, todoItem.getTitle());
     }
 
     @Test
@@ -58,24 +57,24 @@ class TodoMatrixTests {
         this.todoMatrix.addItem(title, dateNotUrgent, true);
         this.todoMatrix.addItem(title, dateNotUrgent, false);
 
-        this.todoMatrix.todoQuarters.get("IU").getItem(0).mark();
-        this.todoMatrix.todoQuarters.get("IN").getItem(0).mark();
-        this.todoMatrix.todoQuarters.get("NU").getItem(0).mark();
-        this.todoMatrix.todoQuarters.get("NN").getItem(0).mark();
+        this.todoMatrix.getQuarters().get("IU").getItem(0).mark();
+        this.todoMatrix.getQuarters().get("IN").getItem(0).mark();
+        this.todoMatrix.getQuarters().get("NU").getItem(0).mark();
+        this.todoMatrix.getQuarters().get("NN").getItem(0).mark();
 
         this.todoMatrix.archiveItems();
 
-        TodoQuarter todoQuarter = this.todoMatrix.todoQuarters.get("IU");
-        assertTrue(todoQuarter.todoItems.isEmpty(), "IU");
+        TodoQuarter todoQuarter = this.todoMatrix.getQuarters().get("IU");
+        assertTrue(todoQuarter.getItems().isEmpty(), "IU");
 
-        todoQuarter = this.todoMatrix.todoQuarters.get("IN");
-        assertTrue(todoQuarter.todoItems.isEmpty(), "IN");
+        todoQuarter = this.todoMatrix.getQuarters().get("IN");
+        assertTrue(todoQuarter.getItems().isEmpty(), "IN");
 
-        todoQuarter = this.todoMatrix.todoQuarters.get("NU");
-        assertTrue(todoQuarter.todoItems.isEmpty(), "NU");
+        todoQuarter = this.todoMatrix.getQuarters().get("NU");
+        assertTrue(todoQuarter.getItems().isEmpty(), "NU");
 
-        todoQuarter = this.todoMatrix.todoQuarters.get("NN");
-        assertTrue(todoQuarter.todoItems.isEmpty(), "NN");
+        todoQuarter = this.todoMatrix.getQuarters().get("NN");
+        assertTrue(todoQuarter.getItems().isEmpty(), "NN");
     }
 
     @Test
@@ -86,7 +85,7 @@ class TodoMatrixTests {
         this.todoMatrix.addItemsFromFile(fileIn);
         this.todoMatrix.saveItemsToFile(fileOut);
 
-        assertReaders( new BufferedReader(new FileReader(fileIn)), new BufferedReader(new FileReader(fileOut)) );
+        assertReaders(new BufferedReader(new FileReader(fileIn)), new BufferedReader(new FileReader(fileOut)));
     }
 
     public static void assertReaders(BufferedReader expected, BufferedReader actual) throws IOException {
@@ -97,5 +96,5 @@ class TodoMatrixTests {
             assertEquals(expectedLine, actualLine);
         }
         assertNull("Actual had more lines then the expected.", actual.readLine());
-    }   
+    }
 }
