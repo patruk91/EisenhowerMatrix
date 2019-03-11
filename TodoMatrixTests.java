@@ -85,16 +85,28 @@ class TodoMatrixTests {
         this.todoMatrix.addItemsFromFile(fileIn);
         this.todoMatrix.saveItemsToFile(fileOut);
 
-        assertReaders(new BufferedReader(new FileReader(fileIn)), new BufferedReader(new FileReader(fileOut)));
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("make a coffee  |14-10| important");
+        expectedList.add("read about OOP  |15-10| important");
+        expectedList.add("give mentors a feedback  |23-10| important");
+
+        BufferedReader reader = new BufferedReader(new FileReader(fileOut));
+        StringBuilder builder = new StringBuilder();
+        String actualLine;
+
+        while ((actualLine = reader.readLine())!= null) {
+            builder.append(actualLine);
+        }
+
+        assertContains(expectedList, builder.toString());
+
+
     }
 
-    public static void assertReaders(BufferedReader expected, BufferedReader actual) throws IOException {
-        String expectedLine;
-        while ((expectedLine = expected.readLine()) != null) {
-            String actualLine = actual.readLine();
-            assertNotNull("Expected had more lines then the actual.", actualLine);
-            assertEquals(expectedLine, actualLine);
+    void assertContains(List<String> expectedElements, String targetOutput) {
+
+        for (String element : expectedElements) {
+            assertTrue(targetOutput.contains(element));
         }
-        assertNull("Actual had more lines then the expected.", actual.readLine());
     }
 }
