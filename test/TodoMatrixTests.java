@@ -28,21 +28,21 @@ class TodoMatrixTests {
         LocalDate dateNotUrgent = today.plusDays(30);
 
         this.todoMatrix.addItem(title, dateUrgent, true);
-        this.todoMatrix.addItem(title, dateUrgent, false);
-        this.todoMatrix.addItem(title, dateNotUrgent, true);
-        this.todoMatrix.addItem(title, dateNotUrgent, false);
+        this.todoMatrix.addItem("importantNotUrgent", dateNotUrgent, true);
+        this.todoMatrix.addItem("notImportantUrgent", dateUrgent, false);
+        this.todoMatrix.addItem("notImportantNotUrgent", dateNotUrgent, false);
 
         TodoItem todoItem = (TodoItem) this.todoMatrix.getQuarters().get("IU").getItem(0);
         assertEquals(title, todoItem.getTitle());
 
         todoItem = (TodoItem) this.todoMatrix.getQuarters().get("IN").getItem(0);
-        assertEquals(title, todoItem.getTitle());
+        assertEquals("importantNotUrgent", todoItem.getTitle());
 
         todoItem = (TodoItem) this.todoMatrix.getQuarters().get("NU").getItem(0);
-        assertEquals(title, todoItem.getTitle());
+        assertEquals("notImportantUrgent", todoItem.getTitle());
 
         todoItem = (TodoItem) this.todoMatrix.getQuarters().get("NN").getItem(0);
-        assertEquals(title, todoItem.getTitle());
+        assertEquals("notImportantNotUrgent", todoItem.getTitle());
     }
 
     @Test
