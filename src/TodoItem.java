@@ -6,6 +6,10 @@ public class TodoItem {
     private LocalDate deadline;
     private boolean isDone = false;
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public TodoItem(String title, LocalDate deadline) {
         this.title = title;
         this.deadline = deadline;
@@ -19,16 +23,18 @@ public class TodoItem {
         return this.deadline;
     }
 
-    public boolean mark() {
-        return this.isDone = true;
+    public void mark() {
+        this.isDone = true;
     }
 
-    public boolean unmark() {
-        return this.isDone = false;
+    public void unmark() {
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        return this.deadline + " " + this.title;
+        String mark = (this.isDone) ? "x" : " " ;
+        String dayMonth = this.deadline.getDayOfMonth() + "-" + this.deadline.getMonthValue();
+        return  String.format("[%s] %s %s", mark, dayMonth, this.title);
     }
 }
