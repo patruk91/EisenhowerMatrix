@@ -118,5 +118,16 @@ public class TodoMatrix {
         }
     }
 
-    
+    public void archiveItems() {
+        for (Map.Entry<String, TodoQuarter> entry : this.todoQuarters.entrySet()) {
+            entry.getValue().archiveItems();
+        }
+    }
+
+    @Override
+    public String toString() {
+        String a = "";
+        return a;
+    }
+
 }
