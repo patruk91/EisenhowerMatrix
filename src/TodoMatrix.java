@@ -1,7 +1,10 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TodoMatrix {
     private Map<String, TodoQuarter> todoQuartes;
@@ -59,5 +62,40 @@ public class TodoMatrix {
         } else {
             todoQuartes.get("NN").addItem(title, deadline);
         }
+    }
+
+    public void addItemsFromFile(String fileName) throws IOException {
+        String line;
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\\|");
+
+                String title = record[0];
+                LocalDate deadline = getDateFromFile(record[1]);
+                String isImportant= isImportant(record);
+
+                if (!isImportant.equals("")) {
+                    addItem(title,  deadline,  true);
+                } else {
+                    addItem(title,  deadline,  false);
+                }
+            }
+        }
+    }
+
+    private LocalDate getDateFromFile(String dateDayMonth) {
+        String[] dayMonth = dateDayMonth.split("-");
+        String currentDate = String.format("%s-%s-%s", Year.now().getValue(), dayMonth[1], dayMonth[0]);
+        return LocalDate.parse(currentDate);
+    }
+
+    private String isImportant(String[] record) {
+        String isImportant;
+        if (record.length > 2) {
+            isImportant = record[2];
+        } else {
+            isImportant = "";
+        }
+        return isImportant;
     }
 }
