@@ -1,13 +1,11 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 import java.util.*;
 
 public class TodoMatrix {
-    private Map<String, TodoQuarter> todoQuartes;
+    private Map<String, TodoQuarter> todoQuarters;
     private TodoQuarter IU;
     private TodoQuarter IN;
     private TodoQuarter NU;
@@ -21,19 +19,19 @@ public class TodoMatrix {
      */
 
     public TodoMatrix() {
-        this.todoQuartes = new HashMap<>();
-        this.todoQuartes.put("IU", this.IU = new TodoQuarter());
-        this.todoQuartes.put("IN", this.IN = new TodoQuarter());
-        this.todoQuartes.put("NU", this.NU = new TodoQuarter());
-        this.todoQuartes.put("NN", this.NN = new TodoQuarter());
+        this.todoQuarters = new HashMap<>();
+        this.todoQuarters.put("IU", this.IU = new TodoQuarter());
+        this.todoQuarters.put("IN", this.IN = new TodoQuarter());
+        this.todoQuarters.put("NU", this.NU = new TodoQuarter());
+        this.todoQuarters.put("NN", this.NN = new TodoQuarter());
     }
 
     public Map<String, TodoQuarter> getQuarters() {
-        return todoQuartes;
+        return todoQuarters;
     }
 
     public TodoQuarter getQuarter(String status) {
-        return todoQuartes.get(status);
+        return todoQuarters.get(status);
     }
 
     public void addItem(String title, LocalDate deadline, boolean isImportant) {
@@ -49,18 +47,18 @@ public class TodoMatrix {
 
     private void isUrgentInAnImportant(long days, String title, LocalDate deadline) {
         if (days <= 3) {
-            todoQuartes.get("IU").addItem(title, deadline);
+            todoQuarters.get("IU").addItem(title, deadline);
         } else {
-            todoQuartes.get("IN").addItem(title, deadline);
+            todoQuarters.get("IN").addItem(title, deadline);
         }
     }
 
     private void isUrgentInAnNotImportant(long days, String title, LocalDate deadline) {
         if (days <= 3) {
-            todoQuartes.get("NU").addItem(title, deadline);
+            todoQuarters.get("NU").addItem(title, deadline);
 
         } else {
-            todoQuartes.get("NN").addItem(title, deadline);
+            todoQuarters.get("NN").addItem(title, deadline);
         }
     }
 
@@ -92,10 +90,33 @@ public class TodoMatrix {
     private String isImportant(String[] record) {
         String isImportant;
         if (record.length > 2) {
-            isImportant = record[2];
+            isImportant = "important";
         } else {
             isImportant = "";
         }
         return isImportant;
     }
+
+    public void saveItemsToFile(String fileName) throws IOException {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
+            for (Map.Entry<String, TodoQuarter> entry : this.todoQuarters.entrySet()) {
+                int i = 0;
+                while (i < entry.getValue().getItems().size()) {
+                    TodoItem item = entry.getValue().getItem(i);
+                    String getCorrectDateFormat = item.getDeadline().getDayOfMonth()
+                            + "-" + item.getDeadline().getMonthValue();
+
+                    if (entry.getKey().equals("IU") || entry.getKey().equals("IN")) {
+                        bufferedWriter.write(String.format("%s|%s|important\n", item.getTitle(), getCorrectDateFormat));
+                        i++;
+                    } else {
+                        bufferedWriter.write(String.format("%s|%s|\n", item.getTitle(), getCorrectDateFormat));
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
