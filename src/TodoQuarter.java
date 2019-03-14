@@ -22,10 +22,10 @@ public class TodoQuarter {
 
     public void archiveItems() {
         for (int i = 0; i < this.todoItems.size(); i++) {
-            if (todoItems.get(i).isDone()) {
-                todoItems.remove(i);
-//                this.todoItems.removeIf(todoItem -> todoItem.isDone());
-            }
+//            if (todoItems.get(i).isDone()) {
+//                todoItems.remove(i);
+                this.todoItems.removeIf(todoItem -> todoItem.isDone());
+//            }
         }
     }
 
@@ -39,13 +39,15 @@ public class TodoQuarter {
 
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.todoItems.size(); i++) {
             String mark = (this.todoItems.get(i).isDone()) ? "x" : " " ;
             String dayMonth = this.todoItems.get(i).getDeadline().getDayOfMonth() + "-"
                     + this.todoItems.get(i).getDeadline().getMonthValue();
-            result += String.format("%d. [%s] %s %s\n", i + 1, mark, dayMonth, this.todoItems.get(i).getTitle());
+
+            stringBuilder.append(String.format("%d. [%s] %s %s\n",
+                    i + 1, mark, dayMonth, this.todoItems.get(i).getTitle()));
         }
-        return result;
+        return stringBuilder.toString();
     }
 }
