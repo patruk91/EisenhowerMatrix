@@ -7,19 +7,14 @@ public class UserAPI {
         TodoMatrix todoMatrix = new TodoMatrix();
         Scanner reader = new Scanner(System.in);
         handleMenu();
+        handleFileOption(reader, todoMatrix);
 
-        updateFile(reader, todoMatrix);
-
-
-
-
-        //show all quarters fix toString method in matrix
-        System.out.println(todoMatrix.getQuarters());
+        System.out.println(todoMatrix); //toString method
 
 
     }
 
-    private static void updateFile(Scanner reader, TodoMatrix todoMatrix) {
+    private static void handleFileOption(Scanner reader, TodoMatrix todoMatrix) {
         String option = reader.nextLine();
         while (!option.equals("q")) {
             if (option.equals("1")) {
