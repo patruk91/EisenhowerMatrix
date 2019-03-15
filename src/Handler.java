@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Handler {
@@ -39,12 +41,38 @@ public class Handler {
             handleStatusOfShownToDo(reader,todoMatrix);
         } else if (option.equals("2")) {
             addItemToMatrix(reader, todoMatrix);
-
+        } else if (option.equals("3") || option.equals("4") || option.equals("5")) {
+            String message = markOrUnmarkOrRemoveItem(todoMatrix, reader, option);
+            System.out.println(message);
         } else {
             String message = option.equals("q") ? "BYE BYE!\n" : "No option available!\n" + "Option: ";
             System.out.print(message);
         }
         return option;
+    }
+
+    private static String markOrUnmarkOrRemoveItem(TodoMatrix todoMatrix, Reader reader, String option) {
+        System.out.println("Please provide a title: ");
+        String title = reader.readString();
+        String[] itemStatus = {"IU", "IN", "NU", "NN"};
+        for (int i = 0; i < itemStatus.length; i++) {
+            List<TodoItem> todoItemList = todoMatrix.getQuarter(itemStatus[i]).getItems();
+            for (int itemIndex = 0; itemIndex < todoItemList.size(); itemIndex++) {
+                if (title.equals(todoItemList.get(itemIndex).getTitle())) {
+                    if (option.equals("3")) {
+                        todoItemList.get(itemIndex).mark();
+                        return "Successful mark!";
+                    } else if (option.equals("4")){
+                        todoItemList.get(itemIndex).unmark();
+                        return "Successful unmark!";
+                    } else {
+                        todoMatrix.getQuarter(itemStatus[i]).removeItem(itemIndex);
+                        return "Item removed!";
+                    }
+                }
+            }
+        }
+        return "Sorry TODO item don't exist!";
     }
 
     private static void addItemToMatrix(Reader reader, TodoMatrix todoMatrix) {
