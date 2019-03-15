@@ -4,16 +4,10 @@ public class UserAPI {
         Reader reader = new Reader();
 
         String option = Handler.handleFileOption(reader, todoMatrix);
-
         System.out.println(todoMatrix); //toString method
         while (!option.equals("q")) {
             Displayer.displayMethods();
             option = Handler.handleMethodOptions(reader, todoMatrix);
         }
-
-//        System.out.println(todoMatrix.addItem();); //toString method
-
-//        System.out.println(todoMatrix); //toString method
-
     }
 }
