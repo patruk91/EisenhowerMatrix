@@ -44,11 +44,42 @@ public class Handler {
         } else if (option.equals("3") || option.equals("4") || option.equals("5")) {
             String message = markOrUnmarkOrRemoveItem(todoMatrix, reader, option);
             System.out.println(message);
-        } else {
+        } else if (option.equals("6")) {
+            String message = archiveItems(todoMatrix);
+            System.out.println(message);
+        } else if(option.equals("7")) {
+            String message = saveToFile(todoMatrix, reader);
+            System.out.println(message);
+        } else if (option.equals("8")) {
+            System.out.println(archiveItems(todoMatrix));
+            System.out.println(saveToFile(todoMatrix, reader));
+            option = "q";
+        } else if(option.equals("9")) {
+            System.out.println("showed matrix");
+        }
+
+        else {
             String message = option.equals("q") ? "BYE BYE!\n" : "No option available!\n" + "Option: ";
             System.out.print(message);
         }
         return option;
+    }
+
+    private static String saveToFile(TodoMatrix todoMatrix, Reader reader) {
+        System.out.print("File name: ");
+        String fileName = reader.readString();
+        try {
+            todoMatrix.saveItemsToFile(fileName);
+        } catch (IOException error) {
+            System.out.println("ERROR: " + error.getMessage());
+            System.out.println("ERROR: We cannot save file.");
+        }
+        return "File saved!";
+    }
+
+    private static String archiveItems(TodoMatrix todoMatrix) {
+            todoMatrix.archiveItems();
+            return "Items archived!";
     }
 
     private static String markOrUnmarkOrRemoveItem(TodoMatrix todoMatrix, Reader reader, String option) {
@@ -56,7 +87,9 @@ public class Handler {
         String title = reader.readString();
         String[] itemStatus = {"IU", "IN", "NU", "NN"};
         for (int i = 0; i < itemStatus.length; i++) {
-            List<TodoItem> todoItemList = todoMatrix.getQuarter(itemStatus[i]).getItems();
+            TodoQuarter itemQuarter = todoMatrix.getQuarter(itemStatus[i]);
+            List<TodoItem> todoItemList = itemQuarter.getItems();
+
             for (int itemIndex = 0; itemIndex < todoItemList.size(); itemIndex++) {
                 if (title.equals(todoItemList.get(itemIndex).getTitle())) {
                     if (option.equals("3")) {
