@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Scanner;
 
 public class Handler {
@@ -47,17 +48,40 @@ public class Handler {
     }
 
     private static void addItemToMatrix(Reader reader, TodoMatrix todoMatrix) {
-        System.out.print("Please provide a title: ");
-        String title = reader.readString();
+        String title = handleTitle(reader);
 
-        System.out.print("Please provide a deadline (format yy-mm-dd): ");
-        LocalDate deadline = LocalDate.parse(reader.readString());
+        String date = handleDate(reader);
+        LocalDate deadline = LocalDate.parse(date);
 
         System.out.print("Is this important (y/n)?: ");
         String checkIfImportant = reader.readString();
 
         boolean isImportant = checkIfImportant.equals("y");
         todoMatrix.addItem(title, deadline, isImportant);
+    }
+
+    private static String handleTitle(Reader reader) {
+        String title = "";
+        while (title.isEmpty()) {
+            System.out.print("Please provide a title: ");
+            title = reader.readString();
+        }
+        return title;
+    }
+
+    private static String handleDate(Reader reader) {
+        String userInput = "";
+
+        while (!(reader.checkIfDateHaveCorrectFormat(userInput) && reader.checkDataLength(userInput))) {
+            System.out.print("Please provide a deadline (format mm-dd): ");
+            userInput = reader.readString();
+            if (reader.checkIfDateHaveCorrectFormat(userInput)) {
+                reader.checkDataLength(userInput);
+
+            }
+        }
+
+        return Year.now().getValue() + "-" + userInput;
     }
 
     private static void handleStatusOfShownToDo(Reader reader, TodoMatrix todoMatrix) {
