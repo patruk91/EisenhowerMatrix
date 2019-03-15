@@ -21,13 +21,13 @@ public class Displayer {
         System.out.println("Please choose option to edit your field: ");
         System.out.println("1. Show status\n"
                             + "2. Add item\n"
-                            + "2. Mark item\n"
-                            + "3. Unmark item\n"
-                            + "4. Remove marked item\n"
-                            + "5. Archive items - remove all done items\n"
-                            + "6. Save to file\n"
-                            + "7. Archive items -> save to file -> quit from application\n"
-                            + "8. Show whole Eisenhower matrix\n"
+                            + "3. Mark item\n"
+                            + "4. Unmark item\n"
+                            + "5. Remove marked item\n"
+                            + "6. Archive items - remove all done items\n"
+                            + "7. Save to file\n"
+                            + "8. Archive items -> save to file -> quit from application\n"
+                            + "9. Show whole Eisenhower matrix\n"
                             + "Press 'q' to exit");
         System.out.print("Option: ");
     }

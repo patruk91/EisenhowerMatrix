@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 public class Handler {
 
-    public static String handleFileOption(Scanner reader, TodoMatrix todoMatrix) {
+    public static String handleFileOption(Reader reader, TodoMatrix todoMatrix) {
         String option;
         do {
             Displayer.displayMenu();
-            option = reader.nextLine();
+            option = reader.readString();
             if (option.equals("1")) {
                 return option;
             } else if (option.equals("2")) {
                 System.out.print("Please, which file to open (e.g 'data.csv'): ");
-                String fileName = reader.nextLine();
+                String fileName = reader.readString();
                 try {
                     todoMatrix.addItemsFromFile(fileName);
                     return option;
@@ -31,48 +31,60 @@ public class Handler {
         return option;
     }
 
-    public static String handleMethodOptions(Scanner reader, TodoMatrix todoMatrix) {
-        String option = reader.nextLine();
+    public static String handleMethodOptions(Reader reader, TodoMatrix todoMatrix) {
+        String option = reader.readString();
         if (option.equals("1")) {
             Displayer.showStatus();
             handleStatusOfShownToDo(reader,todoMatrix);
         } else if (option.equals("2")) {
-            System.out.print("Please provide a title: ");
-            String title = reader.nextLine();
-            System.out.print("Please provide a deadline (format yy-mm-dd): ");
-            LocalDate deadline = LocalDate.parse(reader.nextLine());
-            todoMatrix.getQuarter("IN").addItem(title, deadline);
+            addItemToMatrix(reader, todoMatrix);
+
         } else {
             String message = option.equals("q") ? "BYE BYE!\n" : "No option available!\n" + "Option: ";
             System.out.print(message);
         }
-
         return option;
     }
 
-    private static void handleStatusOfShownToDo(Scanner reader, TodoMatrix todoMatrix) {
-        String option = reader.nextLine();
+    private static void addItemToMatrix(Reader reader, TodoMatrix todoMatrix) {
+        System.out.print("Please provide a title: ");
+        String title = reader.readString();
+
+        System.out.print("Please provide a deadline (format yy-mm-dd): ");
+        LocalDate deadline = LocalDate.parse(reader.readString());
+
+        System.out.print("Is this important (y/n)?: ");
+        String checkIfImportant = reader.readString();
+
+        boolean isImportant = checkIfImportant.equals("y");
+        todoMatrix.addItem(title, deadline, isImportant);
+    }
+
+    private static void handleStatusOfShownToDo(Reader reader, TodoMatrix todoMatrix) {
+        String option = reader.readString();
+        String status;
+        String message;
         if (option.equals("1")) {
-            String status = "IU";
-            String message = getCorrectMessage(status, todoMatrix);
+            status = "IU";
+            message = getCorrectMessage(status, todoMatrix);
             System.out.println(message);
 
         } else if (option.equals("2")) {
-            String status = "IN";
-            String message = getCorrectMessage(status, todoMatrix);
+            status = "IN";
+            message = getCorrectMessage(status, todoMatrix);
             System.out.println(message);
 
         } else if (option.equals("3")) {
-            String status = "NU";
-            String message = getCorrectMessage(status, todoMatrix);
+            status = "NU";
+            message = getCorrectMessage(status, todoMatrix);
             System.out.println(message);
 
         } else if (option.equals("4")) {
-            String status = "NN";
-            String message = getCorrectMessage(status, todoMatrix);
+            status = "NN";
+            message = getCorrectMessage(status, todoMatrix);
             System.out.println(message);
         } else {
-            System.out.print("No option available!"); //elseif for not showing option
+            System.out.println("No option available!");
         }
     }
 

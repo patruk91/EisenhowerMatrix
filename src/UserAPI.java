@@ -1,12 +1,7 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Scanner;
-
 public class UserAPI {
     public static void start(String[] args) {
         TodoMatrix todoMatrix = new TodoMatrix();
-        Scanner reader = new Scanner(System.in);
+        Reader reader = new Reader();
 
         String option = Handler.handleFileOption(reader, todoMatrix);
 
