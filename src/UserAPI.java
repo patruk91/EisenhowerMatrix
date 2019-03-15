@@ -10,7 +10,7 @@ public class UserAPI {
         String option = Handler.handleFileOption(reader, todoMatrix);
         System.out.println(todoMatrix); //toString method
 //        System.out.println(Arrays.toString(table.getColumnsWidth()));
-        table.createTable(todoMatrix);
+        table.LowerPartOfTable(todoMatrix);
 
         while (!option.equals("q")) {
             Displayer.displayMethods();

@@ -9,7 +9,7 @@ public class Table {
         this.todoMatrix = todoMatrix;
     }
 
-    public Integer[] getColumnsWidth() {
+    private Integer[] getColumnsWidth() {
         Integer[] columnsWidth = {0, 0};
         for (Map.Entry<String, TodoQuarter> entry : todoMatrix.getQuarters().entrySet()) {
             String entryKey = entry.getKey();
@@ -48,44 +48,58 @@ public class Table {
         return secondColumnLength;
     }
 
+    public void LowerPartOfTable(TodoMatrix todoMatrix) {
+        final int EXTRA_SPACES = 10;
+        String format = getFormatForPrint(EXTRA_SPACES);
+        String reverseFormat = getReverseFormatForPrint(EXTRA_SPACES);
 
-    public void createTable(TodoMatrix todoMatrix) {
+        TodoQuarter leftQuarter = todoMatrix.getQuarter("NU");
+        TodoQuarter rightQuarter = todoMatrix.getQuarter("NN");
+
+        printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
+        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+
+    }
+
+    private void printTheSameNumberOfRows(TodoQuarter leftQuarter, TodoQuarter rightQuarter, String format) {
+        int minSizeOfItems = Math.min(rightQuarter.getItems().size(), leftQuarter.getItems().size());
+        for (int i = 0; i < minSizeOfItems; i++) {
+            System.out.printf(format, leftQuarter.getItem(i), rightQuarter.getItem(i));
+        }
+    }
+
+    private void printOthersRows(TodoQuarter leftQuarter, TodoQuarter rightQuarter,
+                                 String format, String reverseFormat) {
+        int sizeOfLeftItem = leftQuarter.getItems().size();
+        int sizeOfRightItem = rightQuarter.getItems().size();
+
+        int sizeDifference = Math.abs(sizeOfLeftItem - sizeOfRightItem);
+        if (sizeOfLeftItem > sizeOfRightItem) {
+            for (int i = 1; i <= sizeDifference; i++) {
+                System.out.printf(format, leftQuarter.getItem(sizeOfLeftItem - i), "");
+            }
+        } else {
+            for (int i = 1; i <= sizeDifference; i++) {
+                System.out.printf(reverseFormat, "", rightQuarter.getItem(sizeOfRightItem - i), "");
+            }
+        }
+    }
+
+    private String getFormatForPrint(int extraSpaces) {
         String format = "";
-        String reverseformat = "";
-        int extraSpaces = 10;
-
         for (int i = 0; i < getColumnsWidth().length; i++) {
             format += "%-" + (getColumnsWidth()[i] + extraSpaces) + "s ";
         }
-        format += "%n";
+        return format + "%n";
+    }
 
+    private String getReverseFormatForPrint(int extraSpaces) {
+        String reverseFormat = "";
         for (int i = getColumnsWidth().length; i > 0; i--) {
-            reverseformat += "%-" + (getColumnsWidth()[i - 1] + extraSpaces) + "s ";
+            reverseFormat += "%-" + (getColumnsWidth()[i - 1] + extraSpaces) + "s ";
         }
-        reverseformat += "%n";
-
-        TodoQuarter IU = todoMatrix.getQuarter("IU");
-        TodoQuarter NU = todoMatrix.getQuarter("NU");
-
-        TodoQuarter IN = todoMatrix.getQuarter("IN");
-        TodoQuarter NN = todoMatrix.getQuarter("NN");
-        System.out.println(format);
-
-
-        int first = Math.abs(IN.getItems().size() - NN.getItems().size());
-        for (int i = 0; i < Math.min(NN.getItems().size(), IN.getItems().size()); i++) {
-            System.out.printf(format, IN.getItem(i), NN.getItem(i));
-        }
-
-        if (IN.getItems().size() > NN.getItems().size()) {
-            for (int j = 1; j <= first; j++) {
-                System.out.printf(format, IN.getItem(IN.getItems().size() - j), "");
-            }
-        } else {
-            for (int j = 1; j <= first; j++) {
-                System.out.printf(reverseformat, "", NN.getItem(NN.getItems().size() - j), "");
-            }
-        }
+        return reverseFormat + "%n";
+    }
 
 //        System.out.println(format);
 //        System.out.println();
@@ -93,5 +107,4 @@ public class Table {
 //        System.out.printf(format, IU, NU);
 //        System.out.printf(format, IN, NN);
 
-    }
 }
