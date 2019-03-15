@@ -42,7 +42,7 @@ public class TodoQuarter {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.todoItems.size(); i++) {
-            stringBuilder.append(this.todoItems.get(i).toString() + "\n");
+            stringBuilder.append(i +1 + ". " + this.todoItems.get(i).toString() + "\n");
 //            String mark = (this.todoItems.get(i).isDone()) ? "x" : " " ;
 //            int deadlineDay = this.todoItems.get(i).getDeadline().getDayOfMonth();
 //            int deadlineMonth = this.todoItems.get(i).getDeadline().getMonthValue();

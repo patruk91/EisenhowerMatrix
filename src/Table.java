@@ -48,8 +48,21 @@ public class Table {
         return secondColumnLength;
     }
 
+    public void HigherPartOfTable(TodoMatrix todoMatrix) {
+        final int EXTRA_SPACES = 2;
+        String format = getFormatForPrint(EXTRA_SPACES);
+        String reverseFormat = getReverseFormatForPrint(EXTRA_SPACES);
+
+        TodoQuarter leftQuarter = todoMatrix.getQuarter("IU");
+        TodoQuarter rightQuarter = todoMatrix.getQuarter("IN");
+
+        printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
+        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+
+    }
+
     public void LowerPartOfTable(TodoMatrix todoMatrix) {
-        final int EXTRA_SPACES = 10;
+        final int EXTRA_SPACES = 2;
         String format = getFormatForPrint(EXTRA_SPACES);
         String reverseFormat = getReverseFormatForPrint(EXTRA_SPACES);
 
