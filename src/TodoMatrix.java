@@ -126,10 +126,10 @@ public class TodoMatrix {
 
     @Override
     public String toString() {
-        String  IU = "Important, urgent:\n" + this.todoQuarters.get("IU").toString();
-        String  IN = "Important, not urgent:\n" + this.todoQuarters.get("IN").toString();
-        String  NU = "Not important, urgent:\n" + this.todoQuarters.get("NU").toString();
-        String  NN = "Not important, not urgent:\n" + this.todoQuarters.get("NN").toString();
+        String  IU = "Important items & urgent:\n" + this.todoQuarters.get("IU").toString();
+        String  IN = "Important items & not urgent:\n" + this.todoQuarters.get("IN").toString();
+        String  NU = "Not important items & urgent:\n" + this.todoQuarters.get("NU").toString();
+        String  NN = "Not important items & not urgent:\n" + this.todoQuarters.get("NN").toString();
 
         return IU + IN + NU + NN;
     }
