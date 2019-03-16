@@ -11,7 +11,6 @@ public class UserAPI {
         System.out.println(todoMatrix); //toString method
 //        System.out.println(Arrays.toString(table.getColumnsWidth()));
         table.HigherPartOfTable(todoMatrix);
-        System.out.println();
         table.LowerPartOfTable(todoMatrix);
 
         while (!option.equals("q")) {

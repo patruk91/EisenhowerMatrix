@@ -56,9 +56,23 @@ public class Table {
         TodoQuarter leftQuarter = todoMatrix.getQuarter("IU");
         TodoQuarter rightQuarter = todoMatrix.getQuarter("IN");
 
+        printHeader(EXTRA_SPACES, format);
         printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
         printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+    }
 
+    private void printHeader(int EXTRA_SPACES, String format) {
+        int size = getColumnsWidth()[1] /2 + EXTRA_SPACES;
+        String filled = "-";
+        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES + 1);
+        System.out.printf(format, String.format("%1$"+ size + "s", "URGENT"), "NOT URGENT");
+        System.out.println(filled);
+    }
+
+    private void printFooter(int EXTRA_SPACES) {
+        String filled = "-";
+        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES + 1);
+        System.out.println(filled);
     }
 
     public void LowerPartOfTable(TodoMatrix todoMatrix) {
@@ -69,8 +83,10 @@ public class Table {
         TodoQuarter leftQuarter = todoMatrix.getQuarter("NU");
         TodoQuarter rightQuarter = todoMatrix.getQuarter("NN");
 
+        printFooter(EXTRA_SPACES);
         printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
         printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+        printFooter(EXTRA_SPACES);
 
     }
 
