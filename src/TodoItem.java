@@ -51,7 +51,5 @@ public class TodoItem {
             stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
         }
         return stringBuilder.toString();
-//        return  String.format("[%s] %s %s", mark, dayMonth, this.title);
-
     }
 }

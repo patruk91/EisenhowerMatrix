@@ -7,14 +7,6 @@ public class Reader {
         return reader.nextLine();
     }
 
-    public int readInteger() {
-        return Integer.parseInt(reader.nextLine());
-    }
-
-    public int readInteger(String number) {
-        return Integer.parseInt(reader.nextLine());
-    }
-
     public boolean isNumeric(String number) {
         return number != null && number.matches("[-+]?\\d*\\.?\\d+");
     }
@@ -42,9 +34,5 @@ public class Reader {
         int day = Integer.parseInt(splitDate[1]);
         int month = Integer.parseInt(splitDate[0]);
         return (day <= 31 && day > 0 && month <= 12 && month > 0);
-    }
-
-    private boolean isEmptyInput(String string) {
-        return string.isEmpty();
     }
 }

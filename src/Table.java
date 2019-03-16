@@ -1,6 +1,4 @@
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Table {
     private TodoMatrix todoMatrix;
@@ -59,7 +57,6 @@ public class Table {
 
         printHeader(EXTRA_SPACES, format);
         printTheSameNumberOfRows(leftQuarter, rightQuarter, format, reverseFormat, status);
-//        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, status);
     }
 
     private void printHeader(int EXTRA_SPACES, String format) {

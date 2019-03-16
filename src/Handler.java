@@ -3,8 +3,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Handler {
 
@@ -179,9 +177,4 @@ public class Handler {
         return todoMatrix.getQuarter(status).getItems().size() == 0
                 ? "Matrix is empty!" : todoMatrix.getQuarter(status).toString();
     }
-
-
-
-
-
 }
