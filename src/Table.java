@@ -55,10 +55,11 @@ public class Table {
 
         TodoQuarter leftQuarter = todoMatrix.getQuarter("IU");
         TodoQuarter rightQuarter = todoMatrix.getQuarter("IN");
+        String status = "important";
 
         printHeader(EXTRA_SPACES, format);
-        printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
-        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+        printTheSameNumberOfRows(leftQuarter, rightQuarter, format, reverseFormat, status);
+//        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, status);
     }
 
     private void printHeader(int EXTRA_SPACES, String format) {
@@ -82,34 +83,61 @@ public class Table {
 
         TodoQuarter leftQuarter = todoMatrix.getQuarter("NU");
         TodoQuarter rightQuarter = todoMatrix.getQuarter("NN");
+        String status = "not important";
 
         printFooter(EXTRA_SPACES);
-        printTheSameNumberOfRows(leftQuarter, rightQuarter, format);
-        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat);
+        printTheSameNumberOfRows(leftQuarter, rightQuarter, format, reverseFormat, status);
+//        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, status);
         printFooter(EXTRA_SPACES);
 
     }
 
-    private void printTheSameNumberOfRows(TodoQuarter leftQuarter, TodoQuarter rightQuarter, String format) {
+    private void printTheSameNumberOfRows(TodoQuarter leftQuarter,
+                                          TodoQuarter rightQuarter, String format, String reverseFormat, String status) {
+        int j = 0;
+        char[] charImportant = new char[status.toCharArray().length];
         int minSizeOfItems = Math.min(rightQuarter.getItems().size(), leftQuarter.getItems().size());
         for (int i = 0; i < minSizeOfItems; i++) {
-            System.out.printf(format, leftQuarter.getItem(i), rightQuarter.getItem(i));
+            if (status.equals("important")) {
+                charImportant =  "IMPORTANT".toCharArray();
+                System.out.print(charImportant[i] + "| ");
+                j++;
+            } else if (status.equals("not important")) {
+                charImportant =  "NOT IMPORTANT".toCharArray();
+                System.out.print(charImportant[i] + "| ");
+                j++;
+            }
+            System.out.printf(format, leftQuarter.getItem(i) + "  |", rightQuarter.getItem(i) + "  |");
         }
+        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, charImportant, j);
     }
 
     private void printOthersRows(TodoQuarter leftQuarter, TodoQuarter rightQuarter,
-                                 String format, String reverseFormat) {
+                                 String format, String reverseFormat, char[] charImp, int j) {
+        final String EXTRA_SPACE = "   ";
         int sizeOfLeftItem = leftQuarter.getItems().size();
         int sizeOfRightItem = rightQuarter.getItems().size();
 
-        int sizeDifference = Math.abs(sizeOfLeftItem - sizeOfRightItem);
+        int sizeDifference = (Math.abs(sizeOfLeftItem - sizeOfRightItem));
         if (sizeOfLeftItem > sizeOfRightItem) {
             for (int i = 1; i <= sizeDifference; i++) {
-                System.out.printf(format, leftQuarter.getItem(sizeOfLeftItem - i), "");
+                String condition = (charImp.length > j) ? charImp[j] + "| " : " |";
+                System.out.printf(format, condition + leftQuarter.getItem(sizeOfLeftItem - i), "");
+                j++;
+            }
+            while (j < charImp.length) {
+                System.out.println(charImp[j] + "| ");
+                j++;
             }
         } else {
             for (int i = 1; i <= sizeDifference; i++) {
-                System.out.printf(reverseFormat, "", rightQuarter.getItem(sizeOfRightItem - i), "");
+                String condition = (charImp.length > j) ? charImp[j] + "| " : " |";
+                System.out.printf(reverseFormat, condition, EXTRA_SPACE + rightQuarter.getItem(sizeOfRightItem - i), "");
+                j++;
+            }
+            while (j < charImp.length) {
+                System.out.println(charImp[j] + "| ");
+                j++;
             }
         }
     }
