@@ -63,21 +63,23 @@ public class Table {
     }
 
     private void printHeader(int EXTRA_SPACES, String format) {
-        int size = getColumnsWidth()[1] /2 + EXTRA_SPACES;
+        int size = getColumnsWidth()[1]/2 + EXTRA_SPACES;
         String filled = "-";
-        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES + 1);
-        System.out.printf(format, String.format("%1$"+ size + "s", "URGENT"), "NOT URGENT");
-        System.out.println(filled);
+        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES *2 + 2);
+        format = "%-" + (getColumnsWidth()[1] + 3) + "s| ";
+        format += "%-" + (getColumnsWidth()[0]) + "s| ";
+        System.out.printf(format, " | URGENT", "NOT URGENT");
+        System.out.println("\n" + filled);
     }
 
     private void printFooter(int EXTRA_SPACES) {
         String filled = "-";
-        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES + 1);
+        filled = filled.repeat(getColumnsWidth()[0] + getColumnsWidth()[1] + EXTRA_SPACES*2);
         System.out.println(filled);
     }
 
     public void LowerPartOfTable(TodoMatrix todoMatrix) {
-        final int EXTRA_SPACES = 2;
+        final int EXTRA_SPACES = 3;
         String format = getFormatForPrint(EXTRA_SPACES);
         String reverseFormat = getReverseFormatForPrint(EXTRA_SPACES);
 
@@ -107,14 +109,20 @@ public class Table {
                 System.out.print(charImportant[i] + "| ");
                 j++;
             }
-            System.out.printf(format, leftQuarter.getItem(i) + "  |", rightQuarter.getItem(i) + "  |");
+
+//            format = "";
+//            for (int k = 0; k < getColumnsWidth().length; k++) {
+//                format += "%-" + (getColumnsWidth()[k] ) + "s| ";
+//            }
+//            format += "%n";
+
+            System.out.printf(format, leftQuarter.getItem(i), rightQuarter.getItem(i));
         }
         printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, charImportant, j);
     }
 
     private void printOthersRows(TodoQuarter leftQuarter, TodoQuarter rightQuarter,
                                  String format, String reverseFormat, char[] charImp, int j) {
-        final String EXTRA_SPACE = "   ";
         int sizeOfLeftItem = leftQuarter.getItems().size();
         int sizeOfRightItem = rightQuarter.getItems().size();
 
@@ -126,17 +134,25 @@ public class Table {
                 j++;
             }
             while (j < charImp.length) {
-                System.out.println(charImp[j] + "| ");
+                System.out.print(charImp[j] + "| ");
+                format = "%-" + (getColumnsWidth()[0]) + "s| ";
+                format += "%-" + (getColumnsWidth()[1] + (Math.abs(getColumnsWidth()[0] - getColumnsWidth()[1])) + 4) + "s| ";
+                format += "%n";
+                System.out.printf(format, "", "");
                 j++;
             }
         } else {
             for (int i = 1; i <= sizeDifference; i++) {
                 String condition = (charImp.length > j) ? charImp[j] + "| " : " |";
-                System.out.printf(reverseFormat, condition, EXTRA_SPACE + rightQuarter.getItem(sizeOfRightItem - i), "");
+                System.out.printf(reverseFormat, condition, rightQuarter.getItem(sizeOfRightItem - i), "");
                 j++;
             }
             while (j < charImp.length) {
-                System.out.println(charImp[j] + "| ");
+                System.out.print(charImp[j] + "| ");
+                reverseFormat = "%-" + (getColumnsWidth()[1]) + "s| ";
+                reverseFormat += "%-" + (getColumnsWidth()[0]) + "s| ";
+                reverseFormat += "%n";
+                System.out.printf(reverseFormat, "", "");
                 j++;
             }
         }
@@ -144,17 +160,22 @@ public class Table {
 
     private String getFormatForPrint(int extraSpaces) {
         String format = "";
-        for (int i = 0; i < getColumnsWidth().length; i++) {
-            format += "%-" + (getColumnsWidth()[i] + extraSpaces) + "s ";
-        }
+//        for (int i = 0; i < getColumnsWidth().length; i++) {
+        format += "%-" + (getColumnsWidth()[0]) + "s| ";
+        format += "%-" + (getColumnsWidth()[1] + (Math.abs(getColumnsWidth()[0] - getColumnsWidth()[1])) + 9) + "s| ";
+
+//        }
         return format + "%n";
     }
 
     private String getReverseFormatForPrint(int extraSpaces) {
         String reverseFormat = "";
-        for (int i = getColumnsWidth().length; i > 0; i--) {
-            reverseFormat += "%-" + (getColumnsWidth()[i - 1] + extraSpaces) + "s ";
-        }
+//        for (int i = getColumnsWidth().length; i > 0; i--) {
+        reverseFormat += "%-" + (getColumnsWidth()[1] + 3) + "s| ";
+        reverseFormat += "%-" + (getColumnsWidth()[0]+ (Math.abs(getColumnsWidth()[0] - getColumnsWidth()[1]))) + "s| ";
+
+
+//        }
         return reverseFormat + "%n";
     }
 
