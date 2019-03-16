@@ -89,7 +89,6 @@ public class Table {
 
         printFooter(EXTRA_SPACES);
         printTheSameNumberOfRows(leftQuarter, rightQuarter, format, reverseFormat, status);
-//        printOthersRows(leftQuarter, rightQuarter, format, reverseFormat, status);
         printFooter(EXTRA_SPACES);
 
     }
@@ -109,12 +108,6 @@ public class Table {
                 System.out.print(charImportant[i] + "| ");
                 j++;
             }
-
-//            format = "";
-//            for (int k = 0; k < getColumnsWidth().length; k++) {
-//                format += "%-" + (getColumnsWidth()[k] ) + "s| ";
-//            }
-//            format += "%n";
 
             System.out.printf(format, leftQuarter.getItem(i), rightQuarter.getItem(i));
         }
@@ -160,29 +153,19 @@ public class Table {
 
     private String getFormatForPrint(int extraSpaces) {
         String format = "";
-//        for (int i = 0; i < getColumnsWidth().length; i++) {
         format += "%-" + (getColumnsWidth()[0]) + "s| ";
         format += "%-" + (getColumnsWidth()[1] + (Math.abs(getColumnsWidth()[0] - getColumnsWidth()[1])) + 9) + "s| ";
 
-//        }
         return format + "%n";
     }
 
     private String getReverseFormatForPrint(int extraSpaces) {
         String reverseFormat = "";
-//        for (int i = getColumnsWidth().length; i > 0; i--) {
         reverseFormat += "%-" + (getColumnsWidth()[1] + 3) + "s| ";
         reverseFormat += "%-" + (getColumnsWidth()[0]+ (Math.abs(getColumnsWidth()[0] - getColumnsWidth()[1]))) + "s| ";
 
 
-//        }
+
         return reverseFormat + "%n";
     }
-
-//        System.out.println(format);
-//        System.out.println();
-//        System.out.println();
-//        System.out.printf(format, IU, NU);
-//        System.out.printf(format, IN, NN);
-
 }

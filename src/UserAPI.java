@@ -5,11 +5,9 @@ public class UserAPI {
         TodoMatrix todoMatrix = new TodoMatrix();
         Reader reader = new Reader();
         Table table = new Table(todoMatrix);
-//        System.out.println(Arrays.toString(table.getColumnsWidth()));
 
         String option = Handler.handleFileOption(reader, todoMatrix);
-        System.out.println(todoMatrix); //toString method
-//        System.out.println(Arrays.toString(table.getColumnsWidth()));
+//        System.out.println(todoMatrix); //toString method
         table.HigherPartOfTable(todoMatrix);
         table.LowerPartOfTable(todoMatrix);
 

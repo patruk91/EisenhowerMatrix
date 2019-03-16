@@ -17,9 +17,9 @@ public class Handler {
                 return option;
             } else if (option.equals("2")) {
                 System.out.print("Please, which file to open (e.g 'data.csv'): ");
-//                String fileName = reader.readString();
+                String fileName = reader.readString();
                 try {
-                    todoMatrix.addItemsFromFile("matrix.csv");
+                    todoMatrix.addItemsFromFile(fileName);
                     return option;
                 } catch (FileNotFoundException error) {
                     System.out.println("We couldn't read the file. Error: " + error.getMessage());
@@ -55,7 +55,9 @@ public class Handler {
             System.out.println(saveToFile(todoMatrix, reader));
             option = "q";
         } else if(option.equals("9")) {
-            System.out.println("showed matrix");
+            Table table = new Table(todoMatrix);
+            table.HigherPartOfTable(todoMatrix);
+            table.LowerPartOfTable(todoMatrix);
         }
 
         else {
