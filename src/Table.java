@@ -31,12 +31,18 @@ public class Table {
 
     private void higherPartOfTable(String format, TodoQuarter UpLeftQuarter, TodoQuarter UpRightQuarter) {
         int item = 0;
-        for (int i = 0; i < "IMPORTANT".length(); i++) {
-            char[] charImportant =  "IMPORTANT".toCharArray();
-            System.out.print(charImportant[i] + "| ");
+        int left = UpLeftQuarter.getItems().size();
+        int right = UpRightQuarter.getItems().size();
+        int max = Math.max(left, right);
 
-            int left = UpLeftQuarter.getItems().size();
-            int right = UpRightQuarter.getItems().size();
+        for (int i = 0; i < Math.max("IMPORTANT".length(), max); i++) {
+            char[] charImportant =  "IMPORTANT".toCharArray();
+            if (i < charImportant.length) {
+                System.out.print(charImportant[i] + "| ");
+            } else {
+                System.out.print(" | ");
+            }
+
 
             if (item < Math.min(left, right)) {
                 System.out.printf(format, UpLeftQuarter.getItem(item) , UpRightQuarter.getItem(item));
@@ -55,11 +61,18 @@ public class Table {
 
     private void lowerPartOfTable(String format, TodoQuarter DownLeftQuarter, TodoQuarter DownRightQuarter) {
         int item = 0;
-        for (int i = 0; i < "NOT IMPORTANT".length(); i++) {
+        int left = DownLeftQuarter.getItems().size();
+        int right = DownRightQuarter.getItems().size();
+        int max = Math.max(left, right);
+
+        for (int i = 0; i < Math.max("NOT IMPORTANT".length(), max); i++) {
             char[] charImportant =  "NOT IMPORTANT".toCharArray();
-            System.out.print(charImportant[i] + "| ");
-            int left = DownLeftQuarter.getItems().size();
-            int right = DownRightQuarter.getItems().size();
+            if (i < charImportant.length) {
+                System.out.print(charImportant[i] + "| ");
+            } else {
+                System.out.print(" | ");
+            }
+
 
             if (item < Math.min(left, right)) {
                 System.out.printf(format, DownLeftQuarter.getItem(item) , DownRightQuarter.getItem(item));
