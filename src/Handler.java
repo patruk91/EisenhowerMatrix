@@ -12,9 +12,9 @@ public class Handler {
                 return option;
             } else if (option.equals("2")) {
                 System.out.print("Please, which file to open (e.g 'data.csv'): ");
-//                String fileName = reader.readString();
+                String fileName = reader.readString();
                 try {
-                    todoMatrix.addItemsFromFile("matrix.csv");
+                    todoMatrix.addItemsFromFile(fileName);
                     System.out.println();
                     return option;
                 } catch (FileNotFoundException error) {

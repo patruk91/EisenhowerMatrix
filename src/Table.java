@@ -10,7 +10,6 @@ public class Table {
     public void printTable() {
         this.columnsWidth.calculateColumnsWidth();
         String format = getFormatForPrint();
-        System.out.println(format);
 
         printHeader(format);
         printPartOfTable(format);
