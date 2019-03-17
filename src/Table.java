@@ -81,7 +81,8 @@ public class Table {
     private void printHeader(String format) {
         String filled = "-";
         filled = filled.repeat(columnsWidth.getFirstWidth() + columnsWidth.getSecondWidth() + 6);
-        System.out.printf(format, " | URGENT", "NOT URGENT");
+        System.out.print(" | ");
+        System.out.printf(format, "URGENT", "NOT URGENT");
         System.out.println(filled);
     }
 
