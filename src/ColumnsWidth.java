@@ -7,8 +7,8 @@ public class ColumnsWidth {
 
     public ColumnsWidth(TodoMatrix todoMatrix) {
         this.todoMatrix = todoMatrix;
-        this.firstWidth = 1;
-        this.secondWidth = 1;
+        this.firstWidth = 10;
+        this.secondWidth = 10;
     }
 
     public void calculateColumnsWidth() {
