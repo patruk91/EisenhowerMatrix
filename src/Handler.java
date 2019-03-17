@@ -15,9 +15,10 @@ public class Handler {
                 return option;
             } else if (option.equals("2")) {
                 System.out.print("Please, which file to open (e.g 'data.csv'): ");
-                String fileName = reader.readString();
+//                String fileName = reader.readString();
                 try {
-                    todoMatrix.addItemsFromFile(fileName);
+                    todoMatrix.addItemsFromFile("matrix.csv");
+                    System.out.println();
                     return option;
                 } catch (FileNotFoundException error) {
                     System.out.println("We couldn't read the file. Error: " + error.getMessage());
@@ -32,7 +33,7 @@ public class Handler {
         return option;
     }
 
-    public static String handleMethodOptions(Reader reader, TodoMatrix todoMatrix) {
+    public static String handleMethodOptions(Reader reader, TodoMatrix todoMatrix, Table table) {
         String option = reader.readString();
         if (option.equals("1")) {
             Displayer.showStatus();
@@ -53,9 +54,7 @@ public class Handler {
             System.out.println(saveToFile(todoMatrix, reader));
             option = "q";
         } else if(option.equals("9")) {
-            Table table = new Table(todoMatrix);
-            table.HigherPartOfTable(todoMatrix);
-            table.LowerPartOfTable(todoMatrix);
+            table.printTable();
         }
 
         else {

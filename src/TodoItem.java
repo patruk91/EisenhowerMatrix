@@ -1,5 +1,8 @@
+import javax.swing.colorchooser.ColorChooserComponentFactory;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.awt.Color;
 
 public class TodoItem {
 
@@ -42,14 +45,25 @@ public class TodoItem {
         long days = ChronoUnit.DAYS.between(actualDate, getDeadline());
 
         if (days == 0 && !isDone) {
-            stringBuilder.append(String.format(Colors.ANSI_RED + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+            stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
         } else if (days <= 3  && !isDone) {
-            stringBuilder.append(String.format(Colors.ANSI_YELLOW + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+            stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
         } else if (days > 3  && !isDone) {
-            stringBuilder.append(String.format(Colors.ANSI_GREEN + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+            stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
         } else {
             stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
         }
+
+//        if (days == 0 && !isDone) {
+//            stringBuilder.append(String.format(Colors.ANSI_RED + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+//
+//        } else if (days <= 3  && !isDone) {
+//            stringBuilder.append(String.format(Colors.ANSI_YELLOW + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+//        } else if (days > 3  && !isDone) {
+//            stringBuilder.append(String.format(Colors.ANSI_GREEN + "[%s] %s %s" + Colors.ANSI_RESET, mark, dayMonth, this.title));
+//        } else {
+//            stringBuilder.append(String.format("[%s] %s %s", mark, dayMonth, this.title));
+//        }
         return stringBuilder.toString();
     }
 }
