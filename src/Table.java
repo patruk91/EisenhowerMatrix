@@ -26,7 +26,6 @@ public class Table {
         printFooter();
         lowerPartOfTable(format, DownLeftQuarter, DownRightQuarter);
         printFooter();
-
     }
 
     private void higherPartOfTable(String format, TodoQuarter UpLeftQuarter, TodoQuarter UpRightQuarter) {
@@ -89,8 +88,6 @@ public class Table {
         }
     }
 
-
-
     private void printHeader(String format) {
         String filled = "-";
         filled = filled.repeat(columnsWidth.getFirstWidth() + columnsWidth.getSecondWidth() + 6);
@@ -110,8 +107,4 @@ public class Table {
         format += "%-" + columnsWidth.getSecondWidth() + "s| ";
         return format + "%n";
     }
-
-
-
-
 }

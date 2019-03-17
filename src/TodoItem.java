@@ -1,8 +1,5 @@
-import javax.swing.colorchooser.ColorChooserComponentFactory;
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.awt.Color;
 
 public class TodoItem {
 

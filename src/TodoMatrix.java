@@ -105,7 +105,6 @@ public class TodoMatrix {
                     TodoItem item = entry.getValue().getItem(i);
                     String getCorrectDateFormat = item.getDeadline().getDayOfMonth()
                             + "-" + item.getDeadline().getMonthValue();
-
                     if (entry.getKey().equals("IU") || entry.getKey().equals("IN")) {
                         bufferedWriter.write(String.format("%s|%s|important\n", item.getTitle(), getCorrectDateFormat));
                         i++;

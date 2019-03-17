@@ -38,12 +38,4 @@ public class ColumnsWidth {
     public int getSecondWidth() {
         return secondWidth;
     }
-
-    public int getFirstWidthWithExtraSpaces(int number) {
-        return firstWidth + number;
-    }
-
-    public int getSecondWidthWithExtraSpaces(int number) {
-        return secondWidth + number;
-    }
 }
